@@ -1,0 +1,28 @@
+﻿using UBSAg.Negotiations.Domain.Constants;
+using UBSAg.Negotiations.Domain.Entities;
+using UBSAg.Negotiations.Domain.Enums;
+using UBSAg.Negotiations.Domain.Interfaces;
+
+namespace UBSAg.Negotiations.Application.Categories
+{
+    public class LowRisk : ICategory
+    {
+        private ICategory? _nextCategory;
+
+        public void SetNext(ICategory nextCategory)
+        {
+            _nextCategory = nextCategory;
+        }
+
+        public string? Handle(Trade trade)
+        {
+            if (trade.Value < RiskValueConstant.RISK_CUTOFF_VALUE &&
+                trade.ClientSector.Equals(ClientSectorConstant.PUBLIC_SECTOR, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return TradeCategoriesEnum.LowRisk.ToString().ToUpper();
+            }
+
+            return _nextCategory?.Handle(trade);
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@UBSAg.Negotiations.Api_HostAddress = http://localhost:5254
+
+GET {{UBSAg.Negotiations.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
