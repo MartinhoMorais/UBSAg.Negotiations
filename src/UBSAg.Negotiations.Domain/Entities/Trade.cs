@@ -4,10 +4,11 @@ namespace UBSAg.Negotiations.Domain.Entities
 {
     public class Trade : ITrade
     {
-        public decimal Value { get; }
-        public string ClientSector { get; }        
+        public double Value { get; }
+        public string ClientSector { get; }
 
-        public Trade(decimal value, string clientSector)
+        public Trade() { }
+        public Trade(double value, string clientSector)
         {
             Value=value;
             ClientSector=clientSector;

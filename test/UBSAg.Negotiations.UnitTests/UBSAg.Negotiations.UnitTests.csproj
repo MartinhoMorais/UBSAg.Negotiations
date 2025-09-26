@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\UBSAg.Negotiations.Api\UBSAg.Negotiations.Api.csproj" />
     <ProjectReference Include="..\..\src\UBSAg.Negotiations.Application\UBSAg.Negotiations.Application.csproj" />
     <ProjectReference Include="..\..\src\UBSAg.Negotiations.Domain\UBSAg.Negotiations.Domain.csproj" />
   </ItemGroup>

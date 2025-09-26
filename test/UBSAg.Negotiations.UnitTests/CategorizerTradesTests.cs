@@ -7,11 +7,13 @@ namespace UBSAg.Negotiations.UnitTests
 {
     public class CategorizerTradesTests
     {
-        private readonly Mock<ICategory> _riskChainMock;
+        private readonly Mock<ICategory> _riskChainMockMock;
+        private readonly CategorizerTrades categorizerTrades;
 
         public CategorizerTradesTests()
         {
-            _riskChainMock= new Mock<ICategory>();
+            _riskChainMockMock= new Mock<ICategory>();
+            categorizerTrades = new CategorizerTrades(_riskChainMockMock.Object);
         }
 
         [Fact]
@@ -19,22 +21,20 @@ namespace UBSAg.Negotiations.UnitTests
         {
             // Arrange
             var trades = new List<Trade>
-                {
-                    new(2000000, "Private" ),
-                    new(400000, "Public" ),
-                    new(500000, "Public" ),
-                    new(3000000, "Public" ),
-                    new(1000, "NonExistent")
-                };
+            {
+                new(2000000, "Private" ),
+                new(400000, "Public" ),
+                new(500000, "Public" ),
+                new(3000000, "Public" ),
+                new(1000, "NonExistent")
+            };
 
-            _riskChainMock.SetupSequence(c => c.Handle(It.IsAny<Trade>()))
-                         .Returns("HIGHRISK")
-                         .Returns("LOWRISK")
-                         .Returns("LOWRISK")
-                         .Returns("MEDIUMRISK")
-                         .Returns("");
-            
-            var categorizerTrades = new CategorizerTrades(_riskChainMock.Object);
+            _riskChainMockMock.SetupSequence(c => c.Handle(It.IsAny<Trade>()))
+                .Returns("HIGHRISK")
+                .Returns("LOWRISK")
+                .Returns("LOWRISK")
+                .Returns("MEDIUMRISK")
+                .Returns("");
 
             // Act
             var result = await categorizerTrades.CategorizeTradesByRisk(trades);
@@ -48,7 +48,23 @@ namespace UBSAg.Negotiations.UnitTests
             Assert.Equal("MEDIUMRISK", result[3]);
             Assert.Equal("", result[4]);
 
-            _riskChainMock.Verify(c => c.Handle(It.IsAny<Trade>()), Times.Exactly(5));
+            _riskChainMockMock.Verify(c => c.Handle(It.IsAny<Trade>()), Times.Exactly(5));
+        }
+
+        [Fact]
+        public async Task CategorizeTradeByRisk_ShouldCallHandleAndReturnCategory()
+        {
+            // Arrange          
+            var trade = new Trade(2000000, "Private");
+
+            _riskChainMockMock.Setup(c => c.Handle(trade)).Returns("HIGHRISK");
+
+            // Act            
+            var result = await categorizerTrades.CategorizeTradeByRisk(trade);
+
+            // Assert            
+            Assert.Equal("HIGHRISK", result);
+            _riskChainMockMock.Verify(c => c.Handle(trade), Times.Once());
         }
     }
 }

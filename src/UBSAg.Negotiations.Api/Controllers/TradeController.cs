@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using UBSAg.Negotiations.Application.Commands;
 using UBSAg.Negotiations.Application.Queries;
 using UBSAg.Negotiations.Application.Requests;
-using UBSAg.Negotiations.Domain.Entities;
+using UBSAg.Negotiations.Application.Responses;
 
 namespace UBSAg.Negotiations.Api.Controllers
 {
@@ -27,7 +27,7 @@ namespace UBSAg.Negotiations.Api.Controllers
         }
 
         [HttpGet("categorize")]
-        public async Task<ActionResult<IEnumerable<Trade>>> GetAllTrades()
+        public async Task<ActionResult<IEnumerable<TradesQueryResponse>>> GetAllTrades()
         {
             var trades = await _mediator.Send(new GetAllTradesQuery());
 

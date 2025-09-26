@@ -1,4 +1,4 @@
 ﻿namespace UBSAg.Negotiations.Application.Requests
 {
-    public record TradeRequest(decimal Value, string ClientSector);
+    public record TradeRequest(double Value, string ClientSector);
 }

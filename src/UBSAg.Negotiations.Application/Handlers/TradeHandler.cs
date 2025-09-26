@@ -44,7 +44,6 @@ namespace UBSAg.Negotiations.Application.Handlers
                 _unitOfWork.Rollback();
                 throw;
             }
-
         }
     }
 }

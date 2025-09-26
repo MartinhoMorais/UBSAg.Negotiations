@@ -8,13 +8,11 @@ namespace UBSAg.Negotiations.Application.Handlers
 {
     public class GetAllTradesQueryHandler : IRequestHandler<GetAllTradesQuery, IEnumerable<TradesQueryResponse>>
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ITradeRepository _tradeRepository;
         private readonly ICategorizerTrades _categorizerTrades;
 
-        public GetAllTradesQueryHandler(IUnitOfWork unitOfWork, ITradeRepository tradeRepository, ICategorizerTrades categorizerTrades)
+        public GetAllTradesQueryHandler(ITradeRepository tradeRepository, ICategorizerTrades categorizerTrades)
         {
-            _unitOfWork=unitOfWork;
             _tradeRepository=tradeRepository;
             _categorizerTrades=categorizerTrades;
         }
