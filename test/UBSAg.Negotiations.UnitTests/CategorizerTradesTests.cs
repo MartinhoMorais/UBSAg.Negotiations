@@ -37,7 +37,7 @@ namespace UBSAg.Negotiations.UnitTests
             var categorizerTrades = new CategorizerTrades(_riskChainMock.Object);
 
             // Act
-            var result = await categorizerTrades.CategorizeTradeByRisk(trades);
+            var result = await categorizerTrades.CategorizeTradesByRisk(trades);
 
             // Assert
             Assert.NotNull(result);

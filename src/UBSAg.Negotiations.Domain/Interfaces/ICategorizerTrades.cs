@@ -4,6 +4,7 @@ namespace UBSAg.Negotiations.Domain.Interfaces
 {
     public interface ICategorizerTrades
     {
-        Task<List<string?>> CategorizeTradeByRisk(List<Trade> trades);
+        Task<List<string?>> CategorizeTradesByRisk(List<Trade> trades);
+        Task<string?> CategorizeTradeByRisk(Trade trade);
     }
 }

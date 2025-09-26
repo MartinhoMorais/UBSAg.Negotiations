@@ -2,6 +2,6 @@
 {
     public static class RiskValueConstant
     {
-        public const double RISK_CUTOFF_VALUE = 1_000_000;
+        public const decimal RISK_CUTOFF_VALUE = 1_000_000;
     }
 }

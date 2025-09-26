@@ -11,7 +11,8 @@ namespace UBSAg.Negotiations.Application.Categories
         {
             _riskChain = riskChain;
         }
-        public async Task<List<string?>> CategorizeTradeByRisk(List<Trade> trades)
+
+        public async Task<List<string?>> CategorizeTradesByRisk(List<Trade> trades)
         {            
             List<string?> tradeCategories = [];
 
@@ -21,6 +22,11 @@ namespace UBSAg.Negotiations.Application.Categories
             }
 
             return await Task.FromResult(tradeCategories);
-        }      
+        }
+
+        public async Task<string?> CategorizeTradeByRisk(Trade trade)
+        {
+            return await Task.FromResult(_riskChain.Handle(trade));
+        }
     }
 }

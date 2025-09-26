@@ -1,9 +1,9 @@
 ﻿using Moq;
-using UBSAg.Negotiations.Application.Categories;
-using UBSAg.Negotiations.Domain.Constants;
-using UBSAg.Negotiations.Domain.Entities;
 using UBSAg.Negotiations.Domain.Enums;
+using UBSAg.Negotiations.Domain.Entities;
+using UBSAg.Negotiations.Domain.Constants;
 using UBSAg.Negotiations.Domain.Interfaces;
+using UBSAg.Negotiations.Application.Categories;
 
 public class RiskCategoryTests
 {
@@ -133,7 +133,7 @@ public class RiskCategoryTests
     }
 
     [Fact]
-    public void NoCategory_ShouldReturnNoCategory()
+    public void NoCategory_ShouldReturnEmptyString()
     {
         // Arrange
         var trade = new Trade(1000, "NonExistent");

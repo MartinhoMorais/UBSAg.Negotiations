@@ -1,6 +1,9 @@
-﻿using UBSAg.Negotiations.Domain.Interfaces;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using UBSAg.Negotiations.Application.Behaviors;
 using UBSAg.Negotiations.Application.Categories;
+using UBSAg.Negotiations.Domain.Interfaces;
 
 namespace UBSAg.Negotiations.Application
 {
@@ -26,6 +29,16 @@ namespace UBSAg.Negotiations.Application
 
                 return new CategorizerTrades(lowRisk);
             });
+
+            
+            serviceCollection.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));            
+            serviceCollection.AddMediatR(configuration =>
+            {
+                configuration.RegisterServicesFromAssembly(typeof(ConfigurationDI).Assembly);
+                configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            });
+
+            serviceCollection.AddValidatorsFromAssembly(typeof(ConfigurationDI).Assembly, includeInternalTypes: true);
 
         }
     }

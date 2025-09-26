@@ -2,7 +2,7 @@
 {
     internal interface ITrade
     {
-        double Value { get; }
+        decimal Value { get; }
         string ClientSector { get; }
     }
 }
