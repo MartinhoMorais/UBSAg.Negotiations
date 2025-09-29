@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  ubsag.negotiations.api:
+    image: ${DOCKER_REGISTRY-}ubsagnegotiationsapi
+    build:
+      context: .
+      dockerfile: src/UBSAg.Negotiations.Api/Dockerfile
+    depends_on:
+      - ubsag-db
+
+  ubsag-db:
+    image: postgres:latest
+    container_name: ubsag-db
+    environment:
+      POSTGRES_DB: "UBSAgTrade"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - ./.containers/database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
